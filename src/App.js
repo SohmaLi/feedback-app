@@ -38,7 +38,7 @@ function App() {
   return (
     <div className="App">
       <div className='div-form'>
-      <h1>Feedback Form</h1>
+      <h1>Feedback Form Note</h1>
       <form className='form box' onSubmit={handleSubmit}>
         <label>
           Title:
