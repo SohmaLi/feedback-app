@@ -4,15 +4,17 @@ import './App.css';
 
 function App() {
   const [feedback, setFeedback] = useState('');
+  const [title, setTitle] = useState(''); // State for title
   const [response, setResponse] = useState(null);
   const [feedbackList, setFeedbackList] = useState([]);
 
   const handleSubmit = async (event) => {
     event.preventDefault();
     try {
-      const res = await axios.post('http://localhost:3000/feedback', { message: feedback });
+      const res = await axios.post('http://localhost:3000/feedback', { title, message: feedback });
       setResponse(res.data);
       setFeedback('');
+      setTitle(''); // Clear title input after submission
       fetchFeedback();
     } catch (error) {
       console.error('Error submitting feedback:', error);
@@ -38,6 +40,10 @@ function App() {
       <h1>Feedback Form</h1>
       <form onSubmit={handleSubmit}>
         <label>
+          Title:
+          <input type="text" value={title} onChange={(e) => setTitle(e.target.value)} />
+        </label>
+        <label>
           Feedback:
           <textarea value={feedback} onChange={(e) => setFeedback(e.target.value)} />
         </label>
@@ -47,7 +53,9 @@ function App() {
       <h2>Feedback Log</h2>
       <ul>
         {feedbackList.map((fb, index) => (
-          <li key={index}>{fb.message}</li>
+          <li key={index}>
+            <strong>{fb.title}</strong>: {fb.message}
+          </li>
         ))}
       </ul>
     </div>
