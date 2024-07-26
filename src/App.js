@@ -37,27 +37,31 @@ function App() {
 
   return (
     <div className="App">
+      <div className='div-form'>
       <h1>Feedback Form</h1>
-      <form onSubmit={handleSubmit}>
+      <form className='form box' onSubmit={handleSubmit}>
         <label>
           Title:
-          <input type="text" value={title} onChange={(e) => setTitle(e.target.value)} />
+          <input className='input' type="text" value={title} onChange={(e) => setTitle(e.target.value)} />
         </label>
         <label>
           Feedback:
           <textarea value={feedback} onChange={(e) => setFeedback(e.target.value)} />
         </label>
-        <button type="submit">Submit</button>
+        <button className='submit-button' type="submit">Submit</button>
       </form>
       {response && <p>{response}</p>}
+      </div>
+      <div className='div-log'>
       <h2>Feedback Log</h2>
-      <ul>
+      <ul className='list-log'>
         {feedbackList.map((fb, index) => (
           <li key={index}>
             <strong>{fb.title}</strong>: {fb.message}
           </li>
         ))}
       </ul>
+      </div>
     </div>
   );
 }
