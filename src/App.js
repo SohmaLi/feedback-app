@@ -11,7 +11,7 @@ function App() {
   const handleSubmit = async (event) => {
     event.preventDefault();
     try {
-      const res = await axios.post('http://localhost:3000/feedback', { title, message: feedback });
+      const res = await axios.post('http://feedbackapi.smiledev.info.vn/api/feedback', { title, message: feedback });
       setResponse(res.data);
       setFeedback('');
       setTitle(''); // Clear title input after submission
@@ -24,7 +24,7 @@ function App() {
 
   const fetchFeedback = async () => {
     try {
-      const res = await axios.get('http://localhost:3000/feedback');
+      const res = await axios.get('http://feedbackapi.smiledev.info.vn/api/feedback/all');
       setFeedbackList(res.data);
     } catch (error) {
       console.error('Error fetching feedback:', error);
@@ -38,29 +38,29 @@ function App() {
   return (
     <div className="App">
       <div className='div-form'>
-      <h1>Feedback Form Note</h1>
-      <form className='form box' onSubmit={handleSubmit}>
-        <label>
-          Title:
-          <input className='input' type="text" value={title} onChange={(e) => setTitle(e.target.value)} />
-        </label>
-        <label>
-          Feedback:
-          <textarea value={feedback} onChange={(e) => setFeedback(e.target.value)} />
-        </label>
-        <button className='submit-button' type="submit">Submit</button>
-      </form>
-      {response && <p>{response}</p>}
+        <h1>Feedback Form Note</h1>
+        <form className='form box' onSubmit={handleSubmit}>
+          <label>
+            Title:
+            <input className='input' type="text" value={title} onChange={(e) => setTitle(e.target.value)} />
+          </label>
+          <label>
+            Feedback:
+            <textarea value={feedback} onChange={(e) => setFeedback(e.target.value)} />
+          </label>
+          <button className='submit-button' type="submit">Submit</button>
+        </form>
+        {response && <p>{response}</p>}
       </div>
       <div className='div-log'>
-      <h2>Feedback Log</h2>
-      <ul className='list-log'>
-        {feedbackList.map((fb, index) => (
-          <li key={index}>
-            <strong>{fb.title}</strong>: {fb.message}
-          </li>
-        ))}
-      </ul>
+        <h2>Feedback Log</h2>
+        <ul className='list-log'>
+          {feedbackList.map((fb, index) => (
+            <li key={index}>
+              <strong>{fb.title}</strong>: {fb.message}
+            </li>
+          ))}
+        </ul>
       </div>
     </div>
   );
