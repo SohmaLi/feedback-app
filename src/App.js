@@ -4,18 +4,18 @@ import './App.css';
 
 function App() {
   const [feedback, setFeedback] = useState('');
-  const [title, setTitle] = useState(''); // State for title
+  const [title, setTitle] = useState('');
   const [response, setResponse] = useState(null);
   const [feedbackList, setFeedbackList] = useState([]);
 
   const handleSubmit = async (event) => {
-    event.preventDefault();
+    event.preventDefault(); // Ngăn chặn tải lại trang
     try {
       const res = await axios.post('http://feedbackapi.smiledev.info.vn/api/feedback', { title, message: feedback });
-      setResponse(res.data);
+      setResponse(res.data.message); // Giả sử API trả về message
       setFeedback('');
-      setTitle(''); // Clear title input after submission
-      fetchFeedback();
+      setTitle('');
+      fetchFeedback(); // Làm mới danh sách phản hồi
     } catch (error) {
       console.error('Error submitting feedback:', error);
       setResponse('Error submitting feedback');
@@ -50,7 +50,8 @@ function App() {
           </label>
           <button className='submit-button' type="submit">Submit</button>
         </form>
-        {response && <p>{response}</p>}
+        {/* show text  */}
+        {/* {response && <p>{response}</p>} */}
       </div>
       <div className='div-log'>
         <h2>Feedback Log</h2>
