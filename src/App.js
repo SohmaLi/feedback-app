@@ -50,8 +50,7 @@ function App() {
           </label>
           <button className='submit-button' type="submit">Submit</button>
         </form>
-        {/* show text  */}
-        {/* {response && <p>{response}</p>} */}
+        {response}
       </div>
       <div className='div-log'>
         <h2>Feedback Log</h2>
